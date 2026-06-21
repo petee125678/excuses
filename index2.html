@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <body>
+<title>excuses!!</title>
+<h1>bot that is just full of excuses!!</h1>
+<h1 id="output"></h1>
+<input id="inputtext" placeholder="ask a question?" type="text" id="inputtext">
+<script>
+    let usertext = ""
+    let status = 0
+    let senttext
+    function sentutext(contentu) {
+let newDiv = document.createElement("p")
+let content = document.createTextNode(sen)
+    }
+    setInterval(() => {
+        usertext = document.getElementById("inputtext").value 
+        if (usertext !== "") {status = 1}
+        document.addEventListener("keydown", () => {
+            if (event.key === "Enter" && status !== 0 && status >= 0) {status = 2 
+                senttext = usertext
+                document.getElementById("inputtext").value = ""
+
+            }
+        })
+    },100)
+    
+function respond(){
+      let usertext = document.getElementById("inputtext").value
+      if (usertext.includes("hello")) {}
+
+}
+  
+
+</script>
+    </body>
+</html>
