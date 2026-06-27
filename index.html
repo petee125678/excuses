@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <body>
+<title>excuses!!</title>
+<h1>bot that is just full of excuses!!</h1>
+<h1 id="typing"></h1>
+
+<script>
+    let usertext = ""
+    let status = 0
+    let senttext
+    let amountsent = 0
+    let response = ""
+    function sentutext() {
+    let newp = document.createElement("p")
+    let content = document.createTextNode(senttext)
+    let curp = document.getElementById("p"+amountsent);
+    document.body.insertBefore(newp,curp)
+    newp.appendChild(content)
+    }
+    function sentaitext() {
+    let newp = document.createElement("p")
+    let content = document.createTextNode(response)
+    let curp = document.getElementById("p");
+    document.body.insertBefore(newp,curp)
+    newp.appendChild(content)
+    newp.className = "right"
+    }
+
+
+     document.addEventListener("keydown", () => {
+            if (event.key === "Enter" && status !== 0 && status >= 0) {status = 2 
+                senttext = usertext
+                document.getElementById("inputtext").value = ""
+                sentutext()
+                respond()
+                ++amountsent;}});
+    setInterval(() => {
+        usertext = document.getElementById("inputtext").value 
+        if (usertext !== "") {status = 1};
+    },100)
+    function type(waittime) {
+    
+    }
+function respond(){
+    
+     response="hiii"
+     sentaitext()
+}
+  
+
+</script>
+<style>
+    .right {
+        text-align:right
+    }
+</style>
+<footer><input id="inputtext" placeholder="ask a question?" type="text" id="inputtext"></footer>
+    </body>
+</html>
