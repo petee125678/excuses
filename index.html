@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
+    <head><title>excuses!!</title></head>
     <body>
-<title>excuses!!</title>
 <h1>bot that is just full of excuses!!</h1>
-<h1 id="typing"></h1>
-
+<h1 id="typing"> typing goes here</h1>
+<h1 id="boobtest"></h1>
+<div id="meeping"></div>
+<div id="Waitpwease" style="color:red;font-size: 100px;"></div>
 <script>
     let usertext = ""
     let status = 0
     let senttext
     let amountsent = 0
     let response = ""
+    let dotdotdot = ""
+    let goopbaby = 0
+    let final = ""
+    let isaityping = false
+    let greetingwords = ["hello","hi","ello","good morning",'hey','good afternoon','good evening','good day']
+    let endingwords = ['bye','goodbye','see you later','talk to you later',]
+    let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
+    let negativewords = ['re ugly','re mean','re fat','re anoying','']
+    let mood = "neutral"
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
     let content = document.createTextNode(senttext)
@@ -28,13 +40,15 @@
     }
 
 
-     document.addEventListener("keydown", () => {
-            if (event.key === "Enter" && status !== 0 && status >= 0) {status = 2 
+     document.addEventListener("keydown",async (event) => {
+            if (event.key === "Enter" && status != 0 && status >= 0) {status = 2 
+                if (isaityping != true) {
                 senttext = usertext
                 document.getElementById("inputtext").value = ""
                 sentutext()
                 respond()
-                ++amountsent;}});
+                ++amountsent;} else if (isaityping === true ) {document.getElementById("Waitpwease").textContent = "WAIT"};await sleep(4000);document.getElementById("Waitpwease").textContent = "" }});
+        
     setInterval(() => {
         usertext = document.getElementById("inputtext").value 
         if (usertext !== "") {status = 1};
@@ -42,12 +56,27 @@
     function type(waittime) {
     
     }
-function respond(){
-    
+async function respond(){
+     isaityping = true
+    let waity = senttext.replaceAll(" ","")
+    let boop = senttext.length
+    let goopy = waity.length
+    document.getElementById("boobtest").textContent = goopy
+   let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
+let yay = Math.min(2200, Math.max(300, (goopy - random_negpos) * 200));
+    document.getElementById("boobtest").textContent = yay
+    goopbaby = 1
+    await sleep(yay)
+    goopbaby = 0
+
      response="hiii"
      sentaitext()
+     isaityping = false
 }
-  
+  setInterval (()=>{if (dotdotdot.length > 2){dotdotdot="."} else {dotdotdot = dotdotdot + "."};
+  let final = "bot is typing" + dotdotdot
+if (goopbaby === 1) {document.getElementById("typing").textContent = final} else if (goopbaby === 0) {document.getElementById("typing").textContent = ""};
+},500)
 
 </script>
 <style>
@@ -55,6 +84,6 @@ function respond(){
         text-align:right
     }
 </style>
-<footer><input id="inputtext" placeholder="ask a question?" type="text" id="inputtext"></footer>
+<footer><input id="inputtext" placeholder="ask a question?" type="text"></footer>
     </body>
 </html>
