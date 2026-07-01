@@ -20,13 +20,14 @@
     let greetingwords = ["hello","hi","ello","good morning",'hey','good afternoon','good evening','good day']
     let endingwords = ['bye','goodbye','see you later','talk to you later',]
     let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
-    let negativewords = ['re ugly','re mean','re fat','re anoying','']
+    let negativewords = ['re ugly','re mean','re fat','re anoying',]
     let mood = "neutral"
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
     let content = document.createTextNode(senttext)
     let curp = document.getElementById("p"+amountsent);
+    let pastmood = "neutral"
     document.body.insertBefore(newp,curp)
     newp.appendChild(content)
     }
@@ -63,11 +64,24 @@ async function respond(){
     let goopy = waity.length
     document.getElementById("boobtest").textContent = goopy
    let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
-let yay = Math.min(2200, Math.max(300, (goopy - random_negpos) * 200));
+let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
     document.getElementById("boobtest").textContent = yay
     goopbaby = 1
     await sleep(yay)
     goopbaby = 0
+    if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
+        mood = "confused"
+    } else if (positivewords.some(positivewords => senttext.includes(positivewords))) {
+        mood = "positive"
+    } else if (negativewords.some(negativewords => senttext.includes(negativewords))) {
+        mood = "negative"
+    } else if (!negativewords.some(negativewords => senttext.includes(negativewords)) && !positivewords.some(positivewords => senttext.includes(positivewords))){
+        if (mood === "negative" && pastmood === "positive" || mood === "positive" && pastmood === "negative") {
+            mood = "confused"}
+        } else if (pastmood === "confused") {mood = neutral}
+        
+            let pastmood = mood
+    document.getElementById("boobtest").textContent = mood
 
      response="hiii"
      sentaitext()
