@@ -62,6 +62,7 @@ async function respond(){
     let waity = senttext.replaceAll(" ","")
     let boop = senttext.length
     let goopy = waity.length
+     pastmood = mood
     document.getElementById("boobtest").textContent = goopy
    let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
 let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
@@ -69,6 +70,7 @@ let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
     goopbaby = 1
     await sleep(yay)
     goopbaby = 0
+    
     if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
         mood = "confused"
     } else if (positivewords.some(positivewords => senttext.includes(positivewords))) {
@@ -78,9 +80,10 @@ let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
     } else if (!negativewords.some(negativewords => senttext.includes(negativewords)) && !positivewords.some(positivewords => senttext.includes(positivewords))){
         if (mood === "negative" && pastmood === "positive" || mood === "positive" && pastmood === "negative") {
             mood = "confused"}
-        } else if (pastmood === "confused") {mood = neutral}
+        } else if (pastmood === "confused") {mood = "neutral"
+        } else {}
         
-            let pastmood = mood
+           
     document.getElementById("boobtest").textContent = mood
 
      response="hiii"
