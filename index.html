@@ -22,6 +22,13 @@
     let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
     let negativewords = ['re ugly','re mean','re fat','re anoying',]
     let mood = "neutral"
+    let apology = ['sorry','i\'\m sorry','sry','oops','whoops','mb','my bad']
+    let obligatory = ['have to','got to','must','gotta','should']
+    let question = ['why','how','when','where','what','which','who']
+    let commands = ['tell','go','wait','listen','shut up','quiet','do','dont','don\'\t','help']
+    let actiona = ['stare at a','devoure a','sell a','record a','help a','roast a','eat a','fix a','rebuild a','reconstruct a','cook a',]
+    let actionpers  =  ['stare at my','sell my','code my','record my','help my','eat a','make a dress from a','make a hat from a','make a','spend money on a','help a']
+    let action = ['die','fart','run','runaway','jog','eat','code','game','spend money','take a shower','']
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
@@ -62,7 +69,7 @@ async function respond(){
     let waity = senttext.replaceAll(" ","")
     let boop = senttext.length
     let goopy = waity.length
-     pastmood = mood
+    let pastmood = mood
     document.getElementById("boobtest").textContent = goopy
    let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
 let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
@@ -74,20 +81,18 @@ let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
     if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
         mood = "confused"
     } else if (positivewords.some(positivewords => senttext.includes(positivewords))) {
-        mood = "positive"
+        mood = pastmood === "negative" ? "confused" : "positive"
+        //if the past mood is negative but the current message is positive, set to confused,if not, set to positive.
     } else if (negativewords.some(negativewords => senttext.includes(negativewords))) {
-        mood = "negative"
-    } else if (!negativewords.some(negativewords => senttext.includes(negativewords)) && !positivewords.some(positivewords => senttext.includes(positivewords))){
-        if (mood === "negative" && pastmood === "positive" || mood === "positive" && pastmood === "negative") {
-            mood = "confused"}
-        } else if (pastmood === "confused") {mood = "neutral"
-        } else {}
-        
+        mood = pastmood === "positive" ? "confused" : "negative"
+        //if the past mood is positive but current message is negative, set to confused, if not, set to negative.
+    }
+    
            
     document.getElementById("boobtest").textContent = mood
-
-     response="hiii"
-     sentaitext()
+    if (endingwords.some(endingwords => senttext.includes(endingwords))) {response="bye!";sentaitext()} else {
+     response="hiii";sentaitext()}
+    
      isaityping = false
 }
   setInterval (()=>{if (dotdotdot.length > 2){dotdotdot="."} else {dotdotdot = dotdotdot + "."};
