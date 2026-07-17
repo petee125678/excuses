@@ -1,0 +1,14 @@
+.right {
+        text-align:right
+    }
+.tiny {
+  font-size:5px
+}
+*{
+  font-family:'sf';  
+}
+@font-face {
+font-family:'sf';
+src:url(SF-Pro-Text-Regular.otf) format("opentype");
+font-display:swap;
+}

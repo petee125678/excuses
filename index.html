@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head><title>excuses!!</title></head>
+    <head>
+        <title>excuses!!</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
 <h1>bot that is just full of excuses!!</h1>
 <h1 id="typing"> typing goes here</h1>
@@ -23,12 +26,20 @@
     let negativewords = ['re ugly','re mean','re fat','re anoying',]
     let mood = "neutral"
     let apology = ['sorry','i\'\m sorry','sry','oops','whoops','mb','my bad']
-    let obligatory = ['have to','got to','must','gotta','should']
+    let obligatory = ['have to','got to','must','gotta','should','forgot to']
     let question = ['why','how','when','where','what','which','who']
     let commands = ['tell','go','wait','listen','shut up','quiet','do','dont','don\'\t','help']
     let actiona = ['stare at a','devoure a','sell a','record a','help a','roast a','eat a','fix a','rebuild a','reconstruct a','cook a','steal a','get rid of a','hide a','']
     let actionpers  =  ['stare at my','sell my','code my','record my','help my','eat a','make a dress from a','make a hat from a','make a','spend money on a','help a']
     let action = ['die','fart','run','runaway','jog','eat','code','game','spend money','take a shower','']
+    let goodbyepres = false
+    let greetpres = false
+    let chosenact = ""
+    let chosenreason =""
+    let chosenoblig
+    let time = ""
+
+
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
@@ -38,46 +49,74 @@
     document.body.insertBefore(newp,curp)
     newp.appendChild(content)
     }
+    function gettime() {
+        const apropriateTime = new Date().toLocaleTimeString('en-US', {hour12:true});
+        const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(9)
+        return(noSecondsTime)
+    }
     function sentaitext() {
-    let newp = document.createElement("p")
+    let newp = document.createElement("div")
+    let newt = document.createElement("div")
     let content = document.createTextNode(response)
+    let timec = document.createTextNode(gettime())
+    let curt = document.getElementById("t")
     let curp = document.getElementById("p");
     document.body.insertBefore(newp,curp)
+    document.body.insertBefore(newt,curt)
     newp.appendChild(content)
+    newt.appendChild(timec)
     newp.className = "right"
+    newt.className = "right tiny"
     }
 
 
      document.addEventListener("keydown",async (event) => {
             if (event.key === "Enter" && status != 0 && status >= 0) {status = 2 
-                if (isaityping != true) {
+                if (usertext.replaceAll(" ","") === "") {warn("you must type",2000)}
+                else if (isaityping != true) {
                 senttext = usertext
                 document.getElementById("inputtext").value = ""
                 sentutext()
                 respond()
-                ++amountsent;} else if (isaityping === true ) {document.getElementById("Waitpwease").textContent = "WAIT"};await sleep(4000);document.getElementById("Waitpwease").textContent = "" }});
+                ++amountsent;} else if (isaityping === true ) {warn("WAIT",2000)}}});
         
     setInterval(() => {
         usertext = document.getElementById("inputtext").value 
-        if (usertext !== "") {status = 1};
+        if (usertext.replaceAll(" ","") != "") {status = 1}
     },100)
-    function type(waittime) {
-    
+  
+    function random(from,to) {
+        let ran = 0
+        let fr = Math.round(Number(from))
+        let tonum = Math.round(Number(to))
+        if (fr>tonum) {return("invalid,from may not be bigger than the to")}
+        ran = Math.floor(Math.random()*(tonum-fr+1)+fr) 
+        return(ran)
+    }
+    async function warn(what,time) {
+        document.getElementById("Waitpwease").textContent = what
+        await sleep(time)
+        document.getElementById("Waitpwease").textContent = "" 
     }
 async function respond(){
-     isaityping = true
-    let waity = senttext.replaceAll(" ","")
+     let waity = senttext.replaceAll(" ","")
     let boop = senttext.length
     let goopy = waity.length
+    let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
+    let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
+    await sleep((yay/random_negpos))
+    console.log(random("5","10"))
+     isaityping = true
+     greetpres=false
+     goodbyepres=false
+   
     let pastmood = mood
     document.getElementById("boobtest").textContent = goopy
-   let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
-let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
+   
     document.getElementById("boobtest").textContent = yay
     goopbaby = 1
     await sleep(yay)
     goopbaby = 0
-    
     if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
         mood = "confused"
     } else if (positivewords.some(positivewords => senttext.includes(positivewords))) {
@@ -87,13 +126,17 @@ let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
         mood = pastmood === "positive" ? "confused" : "negative"
         //if the past mood is positive but current message is negative, set to confused, if not, set to negative.
     }
-    
+    function contains(what) { if (what.some(what => senttext.includes(what))) {return(true)} else {return(false)}}
            
     document.getElementById("boobtest").textContent = mood
-    if (endingwords.some(endingwords => senttext.includes(endingwords))) {response="bye!";sentaitext()} else {
-     response="hiii";sentaitext()}
+    if (endingwords.some(endingwords => senttext.includes(endingwords))) 
+    {goodbyepres=true;response = goodbyepres[random(0,(goodbyepres.length))]} 
+    else if (greetingwords.some(greetingwords => senttext.includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length)]; sentaitext()}
     
-     isaityping = false
+
+    else {response="nothng";sentaitext();} 
+    isaityping = false
+    console.log(greetpres)
 }
   setInterval (()=>{if (dotdotdot.length > 2){dotdotdot="."} else {dotdotdot = dotdotdot + "."};
   let final = "bot is typing" + dotdotdot
@@ -101,11 +144,6 @@ if (goopbaby === 1) {document.getElementById("typing").textContent = final} else
 },500)
 
 </script>
-<style>
-    .right {
-        text-align:right
-    }
-</style>
 <footer><input id="inputtext" placeholder="ask a question?" type="text"></footer>
     </body>
 </html>
