@@ -19,6 +19,8 @@
     let dotdotdot = ""
     let goopbaby = 0
     let final = ""
+    let eloise = document.createTextNode("")
+    let currentBubble
     let isaityping = false
     let greetingwords = ["hello","hi","ello","good morning",'hey','good afternoon','good evening','good day']
     let endingwords = ['bye','goodbye','see you later','talk to you later',]
@@ -43,11 +45,18 @@
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
+    let newt = document.createElement("div")
+    let timec = document.createTextNode(gettime())
+    let curt = document.getElementById("t")
     let content = document.createTextNode(senttext)
     let curp = document.getElementById("p"+amountsent);
     let pastmood = "neutral"
     document.body.insertBefore(newp,curp)
     newp.appendChild(content)
+    newt.appendChild(timec)
+    newt.className = "tinyyou"
+    newp.className = "text"
+    document.body.insertBefore(newt,curt)
     }
     function gettime() {
         const apropriateTime = new Date().toLocaleTimeString('en-US', {hour12:true});
@@ -55,6 +64,7 @@
         return(noSecondsTime)
     }
     function sentaitext() {
+        
     let newp = document.createElement("div")
     let newt = document.createElement("div")
     let content = document.createTextNode(response)
@@ -62,10 +72,13 @@
     let curt = document.getElementById("t")
     let curp = document.getElementById("p");
     document.body.insertBefore(newp,curp)
+    newp.className = "right text"
+    if (goopbaby === 1) {newp.appendChild(eloise)} else {newp.appendChild(content)}
+    currentBubble = newp
     document.body.insertBefore(newt,curt)
-    newp.appendChild(content)
+    
     newt.appendChild(timec)
-    newp.className = "right"
+    
     newt.className = "right tiny"
     }
 
@@ -103,7 +116,7 @@ async function respond(){
     let boop = senttext.length
     let goopy = waity.length
     let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
-    let yay = Math.min(6000, Math.max(1000, (goopy - random_negpos) * 200));
+    let yay = Math.min(9000, Math.max(2000, (goopy - random_negpos) * 200));
     await sleep((yay/random_negpos))
     console.log(random("5","10"))
      isaityping = true
@@ -115,6 +128,7 @@ async function respond(){
    
     document.getElementById("boobtest").textContent = yay
     goopbaby = 1
+    sentaitext()
     await sleep(yay)
     goopbaby = 0
     if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
@@ -129,18 +143,17 @@ async function respond(){
     function contains(what) { if (what.some(what => senttext.includes(what))) {return(true)} else {return(false)}}
            
     document.getElementById("boobtest").textContent = mood
-    if (endingwords.some(endingwords => senttext.includes(endingwords))) 
-    {goodbyepres=true;response = goodbyepres[random(0,(goodbyepres.length))]} 
-    else if (greetingwords.some(greetingwords => senttext.includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length)]; sentaitext()}
-    
+    if (greetingwords.some(greetingwords => senttext.includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length-1)]; }
+    else if (endingwords.some(endingwords => senttext.includes(endingwords)) && greetpres === false) {response = endingwords[random(0,endingwords.length-1)]; }
 
-    else {response="nothng";sentaitext();} 
+    else {response="nothng";} 
+    if (currentBubble) currentBubble.textContent = response;
     isaityping = false
     console.log(greetpres)
 }
   setInterval (()=>{if (dotdotdot.length > 2){dotdotdot="."} else {dotdotdot = dotdotdot + "."};
-  let final = "bot is typing" + dotdotdot
-if (goopbaby === 1) {document.getElementById("typing").textContent = final} else if (goopbaby === 0) {document.getElementById("typing").textContent = ""};
+  eloise.nodeValue = dotdotdot
+// if (goopbaby === 1) {document.getElementById("typing").textContent = final} else if (goopbaby === 0) {document.getElementById("typing").textContent = ""};
 },500)
 
 </script>

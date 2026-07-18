@@ -2,10 +2,17 @@
         text-align:right
     }
 .tiny {
-  font-size:5px
+  font-size:max(1vw,16px)
+}
+.tinyyou {
+margin-top: -50px
+
 }
 *{
   font-family:'sf';  
+}
+.text {
+  font-size:max(3vw,50px) 
 }
 @font-face {
 font-family:'sf';
