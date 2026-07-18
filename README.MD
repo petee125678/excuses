@@ -1,0 +1,1 @@
+Hello! this is a "bot" i made! i plan on making it more advanced, well its just going to have excuses for everything! like if you ask it a question it will say it cant, and provide a usually silly response. Im also going to decorate it alot more when i finish it, i aim for it to look like the apple messaging ui! it will hopefully look super pretty!
