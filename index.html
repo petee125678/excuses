@@ -20,6 +20,7 @@
     let goopbaby = 0
     let final = ""
     let eloise = document.createTextNode("")
+    let clockie = document.createTextNode("")
     let currentBubble
     let isaityping = false
     let greetingwords = ["hello","hi","ello","good morning",'hey','good afternoon','good evening','good day']
@@ -40,6 +41,8 @@
     let chosenreason =""
     let chosenoblig
     let time = ""
+    let clorp =""
+    let canfix = true
 
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -60,8 +63,54 @@
     }
     function gettime() {
         const apropriateTime = new Date().toLocaleTimeString('en-US', {hour12:true});
-        const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(9)
+        const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(8,10)
         return(noSecondsTime)
+    }
+    function islower(input) {
+        if (input.toLowerCase() = input) {return(true)} else {return(false)}
+    }
+    function ispunc(input) {
+        if (input=== "!" || input==="."||input==="?") {return(true)} else {return(false)}
+    }
+    function replace(what,charnum,replacewith) {
+        let res = what.substring(0, charnum) + replacewith + what.substring(charnum + 1);
+        return(res)
+    }
+    function autocorrect() {
+        canfix = false
+        let textnum = 0
+        let nextnum = 1
+        let textnumval = ""
+        let nextnumval = ""
+        let text = document.getElementById("inputtext").value
+        for (let j =0; j<text.length; j++) {
+                textnumval = text.at(textnum);
+                nextnumval = text.at(nextnum)
+                if (ispunc(textnumval) === true && islower(nextnumval) === true) {
+                    
+
+                }
+            
+            textnum++
+            nextnum++
+        }
+
+
+
+
+
+
+        canfix = true
+
+    }
+    setInterval(() => {
+        if (isaityping()=== false&&canfix===true) {autocorrect()}
+    }, 30);
+    async function isyoutyping() {
+    let temptext = document.getElementById("inputtext").value
+    await sleep(1500)
+    let temptextnew = document.getElementById("inputtext").value
+    if (temptext === temptextnew ) {return(true)} else if (temptext !== temptextnew) {return(false)}
     }
     function sentaitext() {
         
@@ -72,12 +121,13 @@
     let curt = document.getElementById("t")
     let curp = document.getElementById("p");
     document.body.insertBefore(newp,curp)
-    newp.className = "right text"
-    if (goopbaby === 1) {newp.appendChild(eloise)} else {newp.appendChild(content)}
-    currentBubble = newp
     document.body.insertBefore(newt,curt)
-    
-    newt.appendChild(timec)
+    newp.className = "right text"
+    if (goopbaby === 1) {newp.appendChild(eloise)} else { newp.appendChild(content);newt.appendChild(timec) }
+    currentBubble = newp
+    clorp = newt
+
+
     
     newt.className = "right tiny"
     }
@@ -147,9 +197,10 @@ async function respond(){
     else if (endingwords.some(endingwords => senttext.includes(endingwords)) && greetpres === false) {response = endingwords[random(0,endingwords.length-1)]; }
 
     else {response="nothng";} 
-    if (currentBubble) currentBubble.textContent = response;
+    if (currentBubble) {clorp.textContent = gettime();currentBubble.textContent = response; 
+    
     isaityping = false
-    console.log(greetpres)
+    console.log(greetpres)}
 }
   setInterval (()=>{if (dotdotdot.length > 2){dotdotdot="."} else {dotdotdot = dotdotdot + "."};
   eloise.nodeValue = dotdotdot
@@ -157,6 +208,6 @@ async function respond(){
 },500)
 
 </script>
-<footer><input id="inputtext" placeholder="ask a question?" type="text"></footer>
+<footer><input id="inputtext" placeholder="Message" type="text" class="inputText"></footer>
     </body>
 </html>

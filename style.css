@@ -19,3 +19,12 @@ font-family:'sf';
 src:url(SF-Pro-Text-Regular.otf) format("opentype");
 font-display:swap;
 }
+.inputText {
+  border:none;
+  border-color: transparent;
+  border-style: none;
+  background:#f7f7f7;
+  border-radius: 15px;
+  padding: 7px;
+  caret-color: #078BFF;
+}
