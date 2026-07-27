@@ -1,5 +1,6 @@
 .right {
-        text-align:right
+        text-align:right;
+        margin-left: auto;
     }
 .tiny {
   font-size:max(1vw,16px)
@@ -28,3 +29,14 @@ font-display:swap;
   padding: 7px;
   caret-color: #078BFF;
 }
+.messagebubble {
+  border-radius: 15px;
+  padding: 10px;
+  padding-right: 100px;
+  padding-left: 100px;
+  width:fit-content;
+  height: fit-content;
+  justify-content: right;}
+
+.messagebubble.right {background-color: #078CFF;}
+.messagebubble.left {background-color: #E9E9EB;}

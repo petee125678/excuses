@@ -23,7 +23,7 @@
     let clockie = document.createTextNode("")
     let currentBubble
     let isaityping = false
-    let greetingwords = ["hello","hi","ello","good morning",'hey','good afternoon','good evening','good day']
+    let greetingwords = ["hello","hi",'hey','good day','hai']
     let endingwords = ['bye','goodbye','see you later','talk to you later',]
     let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
     let negativewords = ['re ugly','re mean','re fat','re anoying',]
@@ -34,7 +34,7 @@
     let commands = ['tell','go','wait','listen','shut up','quiet','do','dont','don\'\t','help']
     let actiona = ['stare at a','devoure a','sell a','record a','help a','roast a','eat a','fix a','rebuild a','reconstruct a','cook a','steal a','get rid of a','hide a','']
     let actionpers  =  ['stare at my','sell my','code my','record my','help my','eat a','make a dress from a','make a hat from a','make a','spend money on a','help a']
-    let action = ['die','fart','run','runaway','jog','eat','code','game','spend money','take a shower','']
+    let action = ['die','fart','run','runaway','jog','eat','code','game','spend money','take a shower']
     let goodbyepres = false
     let greetpres = false
     let chosenact = ""
@@ -57,17 +57,18 @@
     document.body.insertBefore(newp,curp)
     newp.appendChild(content)
     newt.appendChild(timec)
-    newt.className = "tinyyou"
-    newp.className = "text"
+    newt.className = "tinyyou right"
+    newp.className = "text right messagebubble"
     document.body.insertBefore(newt,curt)
+    
     }
     function gettime() {
         const apropriateTime = new Date().toLocaleTimeString('en-US', {hour12:true});
-        const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(8,10)
+        const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(8,11)
         return(noSecondsTime)
     }
     function islower(input) {
-        if (input.toLowerCase() = input) {return(true)} else {return(false)}
+        if (input.toLowerCase() === input) {return(true)} else {return(false)}
     }
     function ispunc(input) {
         if (input=== "!" || input==="."||input==="?") {return(true)} else {return(false)}
@@ -79,16 +80,17 @@
     function autocorrect() {
         canfix = false
         let textnum = 0
-        let nextnum = 1
+        let nextnum = 2
         let textnumval = ""
         let nextnumval = ""
         let text = document.getElementById("inputtext").value
+        if (text !== "" && islower(text[0]) === true) {document.getElementById("inputtext").value = replace(text,0,text[0].toUpperCase())}
         for (let j =0; j<text.length; j++) {
                 textnumval = text.at(textnum);
                 nextnumval = text.at(nextnum)
-                if (ispunc(textnumval) === true && islower(nextnumval) === true) {
-                    
-
+                if (nextnumval !== undefined && ispunc(textnumval) === true && islower(nextnumval) === true) {
+                    document.getElementById("inputtext").value = replace(text,nextnum,nextnumval.toUpperCase())
+                    text = document.getElementById("inputtext").value
                 }
             
             textnum++
@@ -103,14 +105,14 @@
         canfix = true
 
     }
-    setInterval(() => {
-        if (isaityping()=== false&&canfix===true) {autocorrect()}
+    setInterval(async () => {
+        if (await isyoutyping() === false&&canfix===true) {autocorrect()}
     }, 30);
     async function isyoutyping() {
     let temptext = document.getElementById("inputtext").value
     await sleep(1500)
     let temptextnew = document.getElementById("inputtext").value
-    if (temptext === temptextnew ) {return(true)} else if (temptext !== temptextnew) {return(false)}
+    if (temptext === temptextnew ) {return(false)} else if (temptext !== temptextnew) {return(true)}
     }
     function sentaitext() {
         
@@ -122,30 +124,32 @@
     let curp = document.getElementById("p");
     document.body.insertBefore(newp,curp)
     document.body.insertBefore(newt,curt)
-    newp.className = "right text"
+    newp.className = "left text messagebubble"
     if (goopbaby === 1) {newp.appendChild(eloise)} else { newp.appendChild(content);newt.appendChild(timec) }
     currentBubble = newp
     clorp = newt
 
 
     
-    newt.className = "right tiny"
+    newt.className = "left tiny"
     }
 
-
-     document.addEventListener("keydown",async (event) => {
-            if (event.key === "Enter" && status != 0 && status >= 0) {status = 2 
+    function sendmessage() {
+        if (event.key === "Enter" && status != 0 && status >= 0) {status = 2 
                 if (usertext.replaceAll(" ","") === "") {warn("you must type",2000)}
                 else if (isaityping != true) {
-                senttext = usertext
+                senttext = document.getElementById("inputtext").value
                 document.getElementById("inputtext").value = ""
                 sentutext()
                 respond()
-                ++amountsent;} else if (isaityping === true ) {warn("WAIT",2000)}}});
+                ++amountsent;} else if (isaityping === true ) {warn("WAIT",2000)}}
+    }
+     document.addEventListener("keydown",async (event) => {sendmessage()});
         
-    setInterval(() => {
+    setInterval(async() => {
         usertext = document.getElementById("inputtext").value 
         if (usertext.replaceAll(" ","") != "") {status = 1}
+        if (isyoutyping()===false && canfix === true) {autocorrect()}
     },100)
   
     function random(from,to) {
@@ -175,7 +179,6 @@ async function respond(){
    
     let pastmood = mood
     document.getElementById("boobtest").textContent = goopy
-   
     document.getElementById("boobtest").textContent = yay
     goopbaby = 1
     sentaitext()
@@ -198,7 +201,7 @@ async function respond(){
 
     else {response="nothng";} 
     if (currentBubble) {clorp.textContent = gettime();currentBubble.textContent = response; 
-    
+
     isaityping = false
     console.log(greetpres)}
 }
