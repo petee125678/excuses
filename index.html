@@ -4,13 +4,19 @@
         <title>excuses!!</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body style="background-color: red;">
 <h1>bot that is just full of excuses!!</h1>
 <h1 id="typing"> typing goes here</h1>
 <h1 id="boobtest"></h1>
 <div id="meeping"></div>
+<div style="position: absolute; width: 46px; height: 37.49px; left: 51px; top: 614.51px; transform: scaleX(-1); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 46 38' fill='none'%3E%3Cpath d='M1.52588e-05 37.3777C21.8468 25.2382 9 17.9877 9 0.487732C27.9149 -2.84835 47.722 11.57 45.8778 24.2266C34.9544 24.2266 16.0208 38.8952 1.52588e-05 37.3777Z' fill='%230A8CFF'/%3E%3C/svg%3E&quot;); background-size: contain; background-repeat: no-repeat;"></div>
+
 <div id="Waitpwease" style="color:red;font-size: 100px;"></div>
-<h1></h1>
+
+
+
+
+
 <script>
     let usertext = ""
     let status = 0
@@ -24,7 +30,7 @@
     let clockie = document.createTextNode("")
     let currentBubble
     let isaityping = false
-    let greetingwords = ["hello","hi",'hey','good day','hai']
+    let greetingwords = ["hello","hi",'hey','good day','hai','hiya']
     let endingwords = ['bye','goodbye','see you later','talk to you later',]
     let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
     let negativewords = ['re ugly','re mean','re fat','re anoying',]
@@ -111,7 +117,7 @@
     }, 30);
     async function isyoutyping() {
     let temptext = document.getElementById("inputtext").value
-    await sleep(1500)
+    await sleep(100)
     let temptextnew = document.getElementById("inputtext").value
     if (temptext === temptextnew ) {return(false)} else if (temptext !== temptextnew) {return(true)}
     }
@@ -195,12 +201,22 @@ async function respond(){
         //if the past mood is positive but current message is negative, set to confused, if not, set to negative.
     }
     function contains(what) { if (what.some(what => senttext.includes(what))) {return(true)} else {return(false)}}
-           
+    
+     async function refresh(time) {
+        await sleep(time)
+        window.location.reload()
+    }
+
     document.getElementById("boobtest").textContent = mood
     if (greetingwords.some(greetingwords => senttext.includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length-1)]; }
-    else if (endingwords.some(endingwords => senttext.includes(endingwords)) && greetpres === false) {response = endingwords[random(0,endingwords.length-1)]; }
+    else if (endingwords.some(endingwords => senttext.includes(endingwords)) && greetpres === false) {response = endingwords[random(0,endingwords.length-1)]; refresh(1500) }
 
-    else {response="nothng";} 
+    else {
+        chosenoblig = obligatory[random(0, obligatory.length-1)];
+        chosenact = action[random(0, action.length-1)];
+        chosenapol = apology[random(0,apology.length-1)];
+        response = chosenapol + ", i " + chosenoblig + " " + chosenact;
+    }
     if (currentBubble) {clorp.textContent = gettime();currentBubble.textContent = response; 
 
     isaityping = false
@@ -212,6 +228,9 @@ async function respond(){
 },500)
 
 </script>
-<footer><input id="inputtext" placeholder="Message" type="text" class="inputText"></footer>
+
+
+
+<footer><input id="inputtext" placeholder="IMessage" type="text" class="inputText"></footer>
     </body>
 </html>
