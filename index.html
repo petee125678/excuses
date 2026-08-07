@@ -3,19 +3,23 @@
     <head>
         <title>excuses!!</title>
         <link rel="stylesheet" href="style.css">
-    </head>
-    <body style="background-color:red;">
-<h1>bot that is just full of excuses!!</h1>
-<h1 id="typing"> typing goes here</h1>
+    </head> 
+
+    <body>
+    <div class="profile"></div>
+    </body> 
+
+    <body id="mainbody">
+
+
 <h1 id="boobtest"></h1>
 <div id="meeping"></div>
 
 <div id="Waitpwease" style="color:red;font-size: 100px;"></div>
 
-<div class="inputdiv" id="liftpls"> <input id="inputtext" placeholder="IMessage" type="text" class="inputText"> <div style="display:inline-flex"></div><img src="unfilled.grey.png" class="sad" id="sheep" onclick="sendmessage(); cansend = !cansend;"></div>
-
-
-
+<div class="inputdiv" id="liftpls"> <input id="inputtext" placeholder="IMessage" type="text" class="inputText"> <div style="display:inline-flex"></div><img src="unfilled.grey.png" class="sad" id="sheep" onclick=" specialaproval = true;sendmessage();"></div>
+<br>
+<br>
 <script>
     let usertext = ""
     let status = 0
@@ -41,6 +45,15 @@
     let actiona = ['stare at a','devoure a','sell a','record a','help a','roast a','eat a','fix a','rebuild a','reconstruct a','cook a','steal a','get rid of a','hide a','']
     let actionpers  =  ['stare at my','sell my','code my','record my','help my','eat a','make a dress from a','make a hat from a','make a','spend money on a','help a']
     let action = ['die','fart','run','runaway','jog','eat','code','game','spend money','take a shower']
+    let askhow = ['hru','how are you','whats up','whats going on','how are you feeling','what are you feeling']
+    let feelpref = ['im feeling ','i feel','im','i am']
+    let feelcon = ['idk','i dont know','confused','weird']
+    let feelpos = ['happy!','happy','jolly!','jolly','amazing!','amazing','great','great!','fantastic!','fantastic','spectacular!','spectacular','wonderful!','wonderful','content!']
+    let feelneg = ['sad','bad','terrible','horrible','depressed']
+    let respneg = ['meanie:(',"you're mean",'ur mean','aw:(','why are u being mean']
+    let resppos = ['awh thanks!','thank u!','thank you!','thanks:)',':)','you too!!']
+    let respcon = ['what?',"you're giving me mixed signals",'huh?','what are u talking about?']
+    let feelneu = ['fine','alright','ok','okay']
     let goodbyepres = false
     let greetpres = false
     let chosenact = ""
@@ -50,6 +63,10 @@
     let clorp =""
     let canfix = true
     let cansend = false
+    let setonce = 0
+    let specialaproval = false
+    let oldobsmood = ""
+    let newobsmood = ""
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
@@ -139,16 +156,22 @@
     
     newt.className = "left tiny"
     }
-
+    
     function sendmessage() {
-        if (event.key === "Enter" && status != 0 && status >= 0) {status = 2 
-                if (usertext.replaceAll(" ","") === "") {warn("you must type",2000)}
-                else if (isaityping != true) {
+        if ( status != 0 && status >= 0) {
+                if (event.key === "Enter" || specialaproval === true) {
+                specialaproval = false
+                status = 2 
+                if (usertext.replaceAll(" ","") === "") {} else 
+                if (isaityping != true) {
                 senttext = document.getElementById("inputtext").value
                 document.getElementById("inputtext").value = ""
                 sentutext()
                 respond()
-                ++amountsent;} else if (isaityping === true ) {warn("WAIT",2000)}}
+                ++amountsent;} else if (isaityping === true ) {cansend= false}
+            
+                }
+            }
     }
      document.addEventListener("keydown",async (event) => {sendmessage()});
         
@@ -156,7 +179,8 @@
         usertext = document.getElementById("inputtext").value 
         if (usertext.replaceAll(" ","") != "") {status = 1}
         if (isyoutyping()===false && canfix === true) {autocorrect()}
-        if (cansend === true ) {document.getElementById("")}
+        if (usertext != "") {cansend = cansend===true?cansend:!cansend} else {cansend = false}
+        document.getElementById("sheep").src = cansend === true ? "filled.blue.png" : "unfilled.grey.png"
     },100)
   
     function random(from,to) {
@@ -172,43 +196,51 @@
         await sleep(time)
         document.getElementById("Waitpwease").textContent = "" 
     }
+    function contains(what) { if (what.some(what => senttext.includes(what))) {return(true)} else {return(false)}}
+        
+        async function refresh(time) {
+            await sleep(time)
+            window.location.reload()
+        }
+        function pickfeel() {
+            if (mood === "positive") {  return(feelpref[random(0,feelpref.length-1)]+" "+feelpos[random(0,feelpos.length-1)])} 
+            else if (mood === "negative") { return( feelpref[random(0,feelpref.length-1)]+" "+feelneg[random(0,feelneg.length-1)])}
+            else if (mood === "confused") { return( feelpref[random(0,feelpref.length-1)]+ " " +feelcon[random(0,feelcon.length-1)])}
+            else {return(feelpref[random(0,feelpref.length-1)]+" "+feelneu[random(0,feelneu.length-1)]) }
+        }
+
 async function respond(){
      let waity = senttext.replaceAll(" ","")
     let boop = senttext.length
     let goopy = waity.length
-    let random_negpos = Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35)));
+    let random_negpos = Math.max(1, Math.floor(Math.random() * Math.max(1, Math.floor(goopy * 0.35))));
     let yay = Math.min(9000, Math.max(2000, (goopy - random_negpos) * 200));
+    isaityping = true
     await sleep((yay/random_negpos))
     console.log(random("5","10"))
-     isaityping = true
      greetpres=false
      goodbyepres=false
    
     let pastmood = mood
-    document.getElementById("boobtest").textContent = goopy
-    document.getElementById("boobtest").textContent = yay
+
     goopbaby = 1
     sentaitext()
     await sleep(yay)
     goopbaby = 0
-    if (positivewords.some(positivewords => senttext.includes(positivewords)) && negativewords.some(negativewords => senttext.includes(negativewords))) {
+    if (positivewords.some(positivewords => senttext.toLowerCase().includes(positivewords)) && negativewords.some(negativewords => senttext.toLowerCase().includes(negativewords))) {
         mood = "confused"
-    } else if (positivewords.some(positivewords => senttext.includes(positivewords))) {
+    } else if (positivewords.some(positivewords => senttext.toLowerCase().includes(positivewords))) {
         mood = pastmood === "negative" ? "confused" : "positive"
         //if the past mood is negative but the current message is positive, set to confused,if not, set to positive.
-    } else if (negativewords.some(negativewords => senttext.includes(negativewords))) {
+    } else if (negativewords.some(negativewords => senttext.toLowerCase().includes(negativewords))) {
         mood = pastmood === "positive" ? "confused" : "negative"
         //if the past mood is positive but current message is negative, set to confused, if not, set to negative.
     }
-    function contains(what) { if (what.some(what => senttext.includes(what))) {return(true)} else {return(false)}}
     
-     async function refresh(time) {
-        await sleep(time)
-        window.location.reload()
-    }
-
-    document.getElementById("boobtest").textContent = mood
-    if (greetingwords.some(greetingwords => senttext.toLowerCase().includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length-1)]; }
+    
+    if (mood !== pastmood && mood === "positive") {response =  resppos[random(0,resppos.length-1)]} else if (mood !== pastmood && mood === "negative") { response = respneg[random(0,respneg.length-1)]} else if (mood !== pastmood && mood === "confused") { response = respcon[random(0,respcon.length-1)]}
+    else if (askhow.some(askhow => senttext.toLowerCase().includes(askhow))=== true ) {response = pickfeel()}
+    else if (greetingwords.some(greetingwords => senttext.toLowerCase().includes(greetingwords)) === true) /*=>*/ {greetpres=true;response = greetingwords[random(0,greetingwords.length-1)];}
     else if (endingwords.some(endingwords => senttext.toLowerCase().includes(endingwords)) && greetpres === false) {response = endingwords[random(0,endingwords.length-1)]; refresh(1500) }
 
     else {
