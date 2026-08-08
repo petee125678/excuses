@@ -20,6 +20,8 @@ POSTIVELY
 - youre wonderful
 - youre sweet 
 - youre kind
+
+
 NEGATIVELY
 - youre ugly
 - youre mean
