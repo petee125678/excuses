@@ -2,22 +2,34 @@
 <html>
     <head>
         <title>excuses!!</title>
-        <link rel="stylesheet" href="style.css">
+        <link id="prettystuff" rel="stylesheet" href="style.css">
     </head> 
 
-    <body>
-    <div class="profile"></div>
-    </body> 
-
-    <body id="mainbody">
 
 
-<h1 id="boobtest"></h1>
-<div id="meeping"></div>
+    <body id="blorp" style="margin-top: 150px; background-color: white;">
 
-<div id="Waitpwease" style="color:red;font-size: 100px;"></div>
+ <div class="profile" id="joop"><img src="image.png" id="pfp"><br>
+<div class="username" id="meepster">gooten!</div>
+<img id="settings" src="gearshape.png" onclick="gearactive = !gearactive; changegears()">
+ </div>
 
-<div class="inputdiv" id="liftpls"> <input id="inputtext" placeholder="IMessage" type="text" class="inputText"> <div style="display:inline-flex"></div><img src="unfilled.grey.png" class="sad" id="sheep" onclick=" specialaproval = true;sendmessage();"></div>
+
+</div>
+<div id="mainbody">
+<div id="waiting" style="display:block">
+<div id="cover"><img id="pinwheel" src="pinwheel.png"></div>
+</div>
+<div id="settingscover" style="align-items: center;justify-content: center;">
+    <button onclick="checkremoveok()" style="display: flex;margin-left: auto;margin-right: auto; margin-top: 25%; margin-bottom: 75%; font-size:100px;">remove ALL css </button>
+    <button onclick="fix()" style="display: flex ;margin-left: auto;margin-right: auto; font-size:25px;margin-top: -70vw">pls fix it</button>
+    <div style="position: fixed;bottom:0;bottom:0;left:0;right:0; text-align: center; font-family: 'sf'; font-size: 5vw; "> made by peter with ♡ </div>
+</div>
+
+
+
+<div class="inputdiv" id="liftpls"> <input id="inputtext" placeholder="PMessage" type="text" class="inputText"> <div style="display:inline-flex"></div><img src="unfilled.grey.png" class="sad" id="sheep" onclick=" specialaproval = true;sendmessage();"></div>
+<div id="Waitpwease"></div>
 <br>
 <br>
 <script>
@@ -33,6 +45,7 @@
     let clockie = document.createTextNode("")
     let currentBubble
     let isaityping = false
+    /*ai added this 4 me bc im lazy*/let catnames = ["All Star","Artemis","Athena","Autumn","Bastet","Batman","Beans","Bear","Big Moe","Bill Furray","Bingo","Binx","Biscuit","Blitzle","Blue","Bluecat","Boule Noire","Bouncer","Bubba","Bunny","Butterscotch","Butters","Buttons","Callie","Candy","Captain Janeway","Captain Nemo","Chairman Meow","Chalice","Cheese","Chewie","Chickpea","Churchill","Cinderella","Cleo","Cloud","Commodore","Coral","Coraline","Cricket","Cujo","Dali","Daisy","Darwin","Delilah","Diablo","Dobby","Dolce Lynn","Dolly","Dovahkiin","Dr. Bombay","Drusilla","Dusty","Emergency","Farofa","Felix","Fifi","Fluff Puff","François","Frigg","Frita","Froggy","Fudge","Gadget","Gaia","Gallifrey","Garfield","Gato","Giblet","Gilgamesh","Ginger","Ginko","Gizmo","Glados","Godzilla","Goose","Halo","Han Solo","Hawthorne","Hazey","Heisenberg","Helios","Hemingway","Hexxus","Hobbes","Honey","Huckle","Indiana Jones","Inky","Isis","Jareth","Jasper","Jinx","Kaiser Wilhelm","Kiara","Kiki","King Hyperion","Kirby","Kitana","Kitten","Kitty","Kiwi","Krackel","Lily","Loki","Lord Potato","Lucky","Luffy","Luna","Lunatic","Lunchbox","Magoo","Maizy","Malibu","Mana","Marceline","Mardi","Marshmallow","Mau","Me-Mow","Meeko","Memine","Meowington","Merlin","Mew","Michaelangelo","Midna","Milkshake","Milo","Minka","Mischief","Miso","Miss Bojangles","Miss Furr","Miss Kitty","Missy","Misty","Mittens","Mitzi","Mixi","Mojo","Monster","Moogy","Moose","Mouse","Mr. Cuppy Cakes","Mr. Riley Toulouse","Mr. Tough","Muad'Dib","Mufasa","Muffet","Muffin","Mulan","Mushi","Nala","Napoleon","Ness","Newt","Noel","Nymeria","Nyx","Odessa","Odin","Olive","Oreo","Oscar","Otis","Oz","Padme","Panda","Papi","Paw","Pax","Peaches","Peekaboo","Peanut","Pepper","Pico","Pineapple","Pinocchio","Pistachio","Pluto","Pond","Pootie","Poppet","Poppy","Pumpkin","Purrcules","Pushkin","Raja","Ramses","Red Baron","Reese","Ritzy","River","Rouge","Ruby","Saffy","Sakamoto","Sakura","Salem","Sandwich","Scaredy","Scorpio","Scratch","Scribbles","Seabass","Shadow","Shampoo","Sheeba","Shimmy","Silver","Simba","Skippy John","Smudge","Sneakers","Snowball","Snowy","Sparrow","Spartapuss","Spectre","Spock","Spoons","Squeakers","Squirt","Squishy","Steve French","Stripe","Sugar","Suki","Sulis","Sweep","T-Bone","Taco","Tallulah","Tank","Tati","Taz","Tazo","Tiddles","Tigger","Tinkerbell","Trick","Trouble","Tuna","Twitch","Venom","Virtue","Visa","Waffles","Wazzie","Weasley","Wheatley","Whïsker Dü","Whisky","Whisp","William Catner","Xaiotato","Yang","Yin","Yoda","Zappacatsa","Zelda","Zephy","Zeppelin","Ziggy","Zippy"]
     let greetingwords = ["hello","hi",'hey','good day','hai','hiya']
     let endingwords = ['bye','goodbye','see you later','talk to you later',]
     let positivewords = ['re cute','re pretty','re smart','re amazing','re great','re nice','re friendly','re beautiful','re wonderful','re sweet','re kind']
@@ -67,7 +80,8 @@
     let specialaproval = false
     let oldobsmood = ""
     let newobsmood = ""
-
+    let timer = 0
+    let gearactive = false
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     function sentutext() {
     let newp = document.createElement("p")
@@ -85,6 +99,7 @@
     document.body.insertBefore(newt,curt)
     
     }
+    document.getElementById("meepster").textContent = catnames[random(0,catnames.length-1)]
     function gettime() {
         const apropriateTime = new Date().toLocaleTimeString('en-US', {hour12:true});
         const noSecondsTime = apropriateTime.slice(0,5)+apropriateTime.slice(8,11)
@@ -128,6 +143,22 @@
         canfix = true
 
     }
+    function checkremoveok() {
+        const userconf = confirm("Are you sure you want to remove all css?(this may break the site)");
+        if (userconf) {
+            document.getElementById("prettystuff").href = ""
+            gearactive=false; changegears()
+            document.getElementById("blorp").style.marginTop = "200px"
+            response = "not everything is so pretty without makeup on right?"
+            sentaitext()
+
+            } else {gearactive=false;changegears()}
+    }
+    function fix() {
+        document.getElementById("prettystuff").href = "style.css"
+    }
+
+    getcatpic()
     setInterval(async () => {
         if (await isyoutyping() === false&&canfix===true) {autocorrect()}
     }, 30);
@@ -136,6 +167,33 @@
     await sleep(100)
     let temptextnew = document.getElementById("inputtext").value
     if (temptext === temptextnew ) {return(false)} else if (temptext !== temptextnew) {return(true)}
+    }
+
+    function changegears() {
+        if (gearactive === true ) {
+            document.getElementById("settings").className = "clock" 
+            document.getElementById("settingscover").style.display = "block"
+            document.getElementById("waiting").style.display = "none"
+            document.getElementById("pfp").style.display = "none"
+            document.getElementById("meepster").style.display = "none"
+            document.getElementById("liftpls").style.display = "none"
+            document.getElementById("joop").style.backgroundColor = "transparent"
+
+        
+        
+        
+        } else 
+        
+        
+        {
+            document.getElementById("settings").className = "count"
+            document.getElementById("settingscover").style.display = "none"
+            document.getElementById("pfp").style.display = ""
+            document.getElementById("meepster").style.display = ""
+            document.getElementById("liftpls").style.display = ""
+            document.getElementById("joop").style.backgroundColor = "white"
+
+        }
     }
     function sentaitext() {
         
@@ -181,6 +239,11 @@
         if (isyoutyping()===false && canfix === true) {autocorrect()}
         if (usertext != "") {cansend = cansend===true?cansend:!cansend} else {cansend = false}
         document.getElementById("sheep").src = cansend === true ? "filled.blue.png" : "unfilled.grey.png"
+         if (document.getElementById("pfp").getAttribute('src') === "image.png") {
+        document.getElementById("waiting").style.display = "block"} 
+        else {document.getElementById("waiting").style.display ="none"}
+        
+        
     },100)
   
     function random(from,to) {
@@ -209,6 +272,11 @@
             else {return(feelpref[random(0,feelpref.length-1)]+" "+feelneu[random(0,feelneu.length-1)]) }
         }
 
+
+    function sendspecial() {
+
+
+    }
 async function respond(){
      let waity = senttext.replaceAll(" ","")
     let boop = senttext.length
@@ -259,8 +327,19 @@ async function respond(){
 // if (goopbaby === 1) {document.getElementById("typing").textContent = final} else if (goopbaby === 0) {document.getElementById("typing").textContent = ""};
 },500)
 
+    function getcatpic() {
+        let image = document.getElementById("pfp")
+        fetch('https://api.thecatapi.com/v1/images/search')
+        .then(resp => resp.json())
+        .then(json => image.src = json[0].url)
+        .catch((error) => { document.getElementById("waiting").style.display ="none"
+        response = "hii!, i was not able to set my pfp to what i wanted:(. other than that, we can continue chatting:)"
+        document.getElementById("blorp").style.marginTop = "200px"
+        sentaitext()
+    })
+}
+       
 </script>
-
 
 
 

@@ -7,32 +7,119 @@
   margin-left:10px
 
 }
-#mainbody {
+
+body{
   background-color:white;
    margin-bottom:150px;
+  
+}
+
+.username {
+  display:flex;
+  justify-content: center;
+  margin-top: auto;
+  font-size: 3vw;
+}
+
+#pinwheel {
+animation: spin 0.5s linear infinite;
+transition: transform 0.3s ease-in-out;
+width: 100px;
+height: auto;
+z-index: 999;
+position: fixed;
+display: block;
+left: 50%;
+top: 50%;
+}
+@keyframes spin {
+  from {transform: translate(-50%, -50%) rotate(0deg);}
+  to {transform: translate(-50%, -50%) rotate(360deg);}
+}
+#cover {
+  background-color:white;
+  z-index: 888;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#settingscover {
+  display: none;
+  background-color:white;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#pfp {
+  border-radius: 100%;
+  margin-top: 20px;
+  width:150px;
+  height:150px;
+  object-fit:cover
+
 }
 .tinyyou {
 margin-top: clamp(-35px,-20vw,-30px);
 margin-right:10px
+}
+#settings {
+height: 4vw;
+width: auto;
+display:flex;
+position: fixed;
+right:0;
+margin-top: 2vw;
+margin-right: 2vw;
+z-index:999;
+}
 
+.count {
+animation: count90 0.5s linear;
+transition: transform 0.3 ease-in-out;
+
+}
+.clock {
+animation: clock90 0.5s linear;
+transition: transform 0.3 ease-in-out;
+}
+
+@keyframes clock90 {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(180deg);}
+}
+@keyframes count90 {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(-180deg);}
 }
 *{
   font-family:'sf';  
+  user-select: none;
 }
+div {font-family: 'sf';}
 .text {
   font-size:max(3vw,50px) 
 }
 #liftpls {
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
 }
 .profile {
-margin-top: -23px;
-background-color: #078BFF;
+background-color:white;
 height: 100px;
 width: 100%;
-height: 125px;
+height: 220px;
 position:fixed;
-top: ;
+top:0;
+right:0;
+display:flex;
+flex-direction: column;
+align-items: center;
+z-index: 1001;
+
 }
 .sad {
  height: 9vw;
@@ -57,6 +144,7 @@ font-display:swap;
   margin-left:5px;
   width: 85vw;
 }
+
 .inputdiv {
   display: flex;
   align-items: center;
@@ -86,7 +174,8 @@ font-display:swap;
   height: fit-content;
   justify-content: right;
   word-break: break-all;
-  white-space: nowrap;
+  text-align: left;
+
 }
 
 
